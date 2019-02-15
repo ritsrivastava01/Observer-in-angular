@@ -1,0 +1,23 @@
+:host {
+  display: flex;
+  justify-content: center;
+
+  mat-card {
+    width: 40%;
+    margin-top: 100px;
+
+    mat-card-content {
+      margin: 0 16px;
+
+      .full-width {
+        width: 100%;
+      }
+
+      .error {
+        color: #f44336;
+        font-size: .7rem;
+        font-style: italic;
+      }
+    }
+  }
+}

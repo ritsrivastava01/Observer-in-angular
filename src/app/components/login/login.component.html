@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-subtitle>Please provide credential</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+
+    <form [formGroup]="loginForm">
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="User Id" placeholder="Enter your User Id" formControlName="userId" required>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Password" placeholder="Enter your password" formControlName="password" required>
+
+
+        </mat-form-field>
+        <div *ngIf="frm.password?.errors?.pattern" class="error">
+          Only small letters allowed.
+        </div>
+        <div *ngIf="frm.password?.errors?.maxlength" class="error">
+                Only 32 characters allowed.
+        </div>
+        <div *ngIf="frm.password?.errors?.forbiddenChareter" class="error">
+          '{{frm.password?.errors?.forbiddenChareter.join(',')}}' characters are not allowed.
+        </div>
+
+        <div *ngIf="customErrorMessage" class="error">
+                {{customErrorMessage}}
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-button (click)="resetForm()">Cancel</button>
+    <button mat-raised-button color="warn" (click)="onLoginClickHandler()">Login</button>
+
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,6 @@
+
+<h1>Jokes</h1>
+<span>Hit on 'Like button' to add in your favourite joke.</span>
+  <div *ngFor="let joke of jokes" >
+<app-joke-card  [joke]=joke (manageFavourite)="onManageFavourite($event)" ></app-joke-card>
+</div>

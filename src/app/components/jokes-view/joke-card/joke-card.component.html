@@ -1,0 +1,8 @@
+
+<mat-card [ngClass]="{ 'selected':joke?.isFavourite }">
+   <div  class="joke">{{joke?.message}}</div>
+   <div class="manage-fav" >
+      <button mat-button *ngIf=!joke?.isFavourite (click)="onClickHandler(true)" > <mat-icon matTooltip="Like It">thumb_up</mat-icon></button>
+      <button mat-button *ngIf=joke?.isFavourite (click)="onClickHandler(false)"> <mat-icon matTooltip="Unlike It">thumb_down</mat-icon></button>
+  </div>
+</mat-card>

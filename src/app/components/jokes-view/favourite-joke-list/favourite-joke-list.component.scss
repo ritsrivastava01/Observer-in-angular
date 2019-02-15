@@ -1,0 +1,19 @@
+:host {
+  .header {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+
+    .flex-spacer {
+      flex-grow: 1;
+    }
+  }
+
+  .no-favourite {
+    justify-content: center;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    font-size: 3rem;
+  }
+}
