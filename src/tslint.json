@@ -1,17 +1,47 @@
 {
-    "extends": "../tslint.json",
-    "rules": {
-        "directive-selector": [
-            true,
-            "attribute",
-            "app",
-            "camelCase"
-        ],
-        "component-selector": [
-            true,
-            "element",
-            "app",
-            "kebab-case"
-        ]
-    }
+  "extends": "../tslint.json",
+
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "app",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "app",
+      "kebab-case"
+    ],
+
+    // Codelyzer core rules (http://codelyzer.com/rules/)
+    "angular-whitespace": true,
+    "no-unused-css": true,
+    "trackBy-function": true,
+    "use-input-property-decorator": true,
+    "import-destructuring-spacing": true,
+
+    // TSLint core rules (https://palantir.github.io/tslint/rules/)
+    "ban-comma-operator": true,
+    "no-import-side-effect": true,
+    "no-inferrable-types": true,
+    "no-non-null-assertion": true,
+    "only-arrow-functions": true,
+    //Finally it will be true 
+    "no-console": false,
+    "no-duplicate-switch-case": true,
+    "no-duplicate-variable": true,
+    "no-var-keyword": true,
+    "triple-equals": true,
+    "indent": [
+      true,
+      "spaces",
+      2
+    ],
+    "switch-default": true,
+    "eofline": true,
+    "no-duplicate-imports": true,
+    "no-unused-variable": true
+  }
 }

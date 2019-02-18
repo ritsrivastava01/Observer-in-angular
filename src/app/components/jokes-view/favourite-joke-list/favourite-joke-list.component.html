@@ -1,13 +1,15 @@
 <div class="header">
-<h1>Favourite Jokes</h1>
-<div  class="flex-spacer"></div>
-<mat-slide-toggle (change)="onSlideChange($event)">Add Random Favourite Joke</mat-slide-toggle>
+  <h1>Favourite Jokes</h1>
+  <div class="flex-spacer"></div>
+  <mat-slide-toggle (change)="onSlideChange($event)">Add Random Favourite Joke</mat-slide-toggle>
 </div>
+
 <div *ngIf="favouriteJokes?.length">
-<div *ngFor="let joke of favouriteJokes">
-    <app-joke-card  [joke]=joke (manageFavourite)="removeFavourite($event)" ></app-joke-card>
+  <div *ngFor="let joke of favouriteJokes; trackBy:index">
+    <app-joke-card [joke]=joke (manageFavourite)="removeFavourite($event)"></app-joke-card>
+  </div>
 </div>
-</div>
+
 <div *ngIf="!favouriteJokes?.length" class="no-favourite">
-No Favourite Joke!!!
+  No Favourite Joke!!!
 </div>
