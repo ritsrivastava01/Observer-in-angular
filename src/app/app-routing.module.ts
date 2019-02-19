@@ -7,10 +7,6 @@ const routes: Routes = [
   {
     path: 'jokes',
     component: JokesViewComponent
-  },
-  {
-    path: 'login',
-    component: LoginComponent
   }
 ];
 

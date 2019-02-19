@@ -1,6 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<app-header (clickHandler) ="onClickHandler($event)"></app-header>
-
+<app-header (logoutClicked) ="logoutClickedHandler()" [isSuccessfulLogin] ="isSuccessfulLogin"></app-header>
+<app-login *ngIf="!isSuccessfulLogin" (loginDone)=loginDoneHandler($event)></app-login>
     <div class="row container">
         <router-outlet></router-outlet>
     </div>

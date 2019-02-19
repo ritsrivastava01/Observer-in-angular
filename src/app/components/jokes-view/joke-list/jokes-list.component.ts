@@ -1,6 +1,6 @@
 
 import { Joke } from '../joke';
-import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Subject, interval } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 import { MatSlideToggleChange } from '@angular/material';
@@ -34,17 +34,11 @@ export class JokesListComponent implements OnInit {
           this.getSingleJoke.getRandomJoke()
             .subscribe(x => {
               console.table(this.jokesList);
-              let joke: Joke = x[0];
+              const joke: Joke = x[0];
               joke.isFavourite = true;
               this.jokeCardSelected(joke);
               this.cdRef.detectChanges();
-              
             });
-      //console.log('add Joke');
-      //this.getSingleJokeService.addFavouriteJoke();
-      // this.snackBar.open('Random joke added in your favourite list successfully', null, {
-      //  duration: 1000,
-      //});
     }
     );
   });

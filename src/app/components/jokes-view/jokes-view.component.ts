@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GetJokesService } from './services/get-jokes.service';
 import { Joke } from './joke';
 import { MatSnackBar } from '@angular/material';
+import { ManageFavService } from './services/manage-fav.service';
 
 
 @Component({
@@ -13,14 +14,15 @@ export class JokesViewComponent implements OnInit {
   jokesList: Joke[] = [];
   favouriteJokeList: Joke[] = [];
 
-  constructor(private jokeService: GetJokesService, private snackBar: MatSnackBar) { }
+  constructor(private jokeService: GetJokesService, private snackBar: MatSnackBar, private manageFavService: ManageFavService) { }
 
   ngOnInit() {
     this.jokeService.getJokes(10)
       .subscribe(jokes => {
         this.jokesList = jokes;
       });
-
+        //this.manageFavService.getSavedFavourite()
+        
   }
   jokeSelected = (selectedJoke: Joke): void => {
     let message = '';

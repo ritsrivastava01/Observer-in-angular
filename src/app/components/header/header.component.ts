@@ -1,5 +1,5 @@
 
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -7,23 +7,12 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
-  @Output() clickHandler: EventEmitter<string> = new EventEmitter<string>();
-  isAlreadyLogin = false;
+  @Input() isSuccessfulLogin: boolean;
+  @Output() logoutClicked: EventEmitter<void> = new EventEmitter();
 
   constructor() { }
-
-  ngOnInit = (): void => {
-    this.isAlreadyLogin = sessionStorage.getItem('login') ? true : false;
-  }
-
-  /**
-   * used to handle click
-   */
-  onClickHandler = (url: string): void => {
-    this.clickHandler.emit(url);
-  }
 
   /**
    * used to handle logout session
@@ -31,8 +20,7 @@ export class HeaderComponent implements OnInit {
    * then redirect to login screen
    */
   logoutSession = () => {
-    sessionStorage.removeItem('login');
-    this.isAlreadyLogin = false;
-    this.clickHandler.emit('login');
+    this.isSuccessfulLogin = false;
+    this.logoutClicked.emit();
   }
 }

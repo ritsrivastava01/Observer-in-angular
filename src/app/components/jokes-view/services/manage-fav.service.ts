@@ -1,40 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Joke } from '../joke';
-import { ReplaySubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
+import { BehaviorSubject, Subject, Observer, Observable, observable, of, from } from 'rxjs';
+import { observeOn } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class ManageFavService {
+  //favouriteJokesList: Observer<Array<Joke>>;
+  private favouriteJokes: Array<Joke>;
 
-
-  favouriteJokes$: ReplaySubject<Array<Joke>> = new ReplaySubject();
-  private favouriteJokesList: Array<Joke>;
   constructor() {
-    this.favouriteJokesList = this.getSavedFavourite();
-    if (!!this.favouriteJokesList) {
-      this.favouriteJokes$.next(this.favouriteJokesList);
-    }
   }
 
-  manageFavourite = (joke: Joke) => {
+  handleFavourite = (joke: Joke) => {
     if (!joke.isFavourite) {
-      const elementIndex: number = this.favouriteJokesList.indexOf(joke, 0);
-      this.favouriteJokesList.splice(elementIndex, 1);
+      const elementIndex: number = this.favouriteJokes.indexOf(joke, 0);
+      this.favouriteJokes.splice(elementIndex, 1);
     } else {
-      this.favouriteJokesList.push(joke);
+      this.favouriteJokes.push(joke);
     }
 
-    this.handelLocalStorage(this.favouriteJokesList);
-    this.favouriteJokes$.next(this.favouriteJokesList);
+    this.saveLocalStorage(this.favouriteJokes);
+    //this.favouriteJokesList.next(this.favouriteJokes);
   }
 
-  private getSavedFavourite = (): Array<Joke> => {
-      return this.hasItem('saveJoke') ? JSON.parse(localStorage.getItem('saveJoke'))
-        .map((fav: Joke) => <Joke>fav): [];
+  getSavedFavourite = (): Observer<Array<Joke>> => {
+    return JSON.parse(localStorage.getItem('saveJoke'))
+      .map((fav: Joke) => <Joke>fav);
+
   }
-  private handelLocalStorage = (data: Joke[]) => {
+  private saveLocalStorage = (data: Joke[]) => {
     if (this.hasItem('saveJoke')) {
       localStorage.removeItem('saveJoke');
     }
