@@ -1,5 +1,9 @@
-<mat-tab-group>
-  <mat-tab label="Today's Jokes"> <app-jokes-list></app-jokes-list></mat-tab>
-  <mat-tab label="Your Favourite Jokes"> <app-favourite-joke-list></app-favourite-joke-list></mat-tab>
+<mat-tab-group (selectedTabChange)=matChange($event)>
+  <mat-tab label="Today's Jokes">
+    <app-jokes-list [jokesList]="jokesList" [isFavouriteTab]=false (jokeSelected)=jokeSelected($event) ></app-jokes-list>
+  </mat-tab>
+  <mat-tab label="Your Favourite Jokes">
+      <app-jokes-list [jokesList]=favouriteJokeList [isFavouriteTab]=true (jokeSelected)=jokeSelected($event)></app-jokes-list>
+    <!-- <app-favourite-joke-list [favouriteJokesList]=favouriteJokeList></app-favourite-joke-list> -->
+  </mat-tab>
 </mat-tab-group>
- 

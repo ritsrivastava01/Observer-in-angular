@@ -9,12 +9,12 @@ import { Joke } from '../joke';
 })
 export class JokeCardComponent {
   @Input() joke: Joke;
-  @Output() manageFavourite: EventEmitter<Joke> = new EventEmitter<Joke>()
+  @Output() jokeCardSelected: EventEmitter<Joke> = new EventEmitter<Joke>()
   constructor() { }
 
   onClickHandler = (status: boolean) => {
     this.joke.isFavourite = status;
-    this.manageFavourite.emit(this.joke);
+    this.jokeCardSelected.emit(this.joke);
   }
 
 }

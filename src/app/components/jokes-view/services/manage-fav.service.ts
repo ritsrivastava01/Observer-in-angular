@@ -10,7 +10,7 @@ export class ManageFavService {
 
 
   favouriteJokes$: ReplaySubject<Array<Joke>> = new ReplaySubject();
-  private favouriteJokesList: Joke[] = [];
+  private favouriteJokesList: Array<Joke>;
   constructor() {
     this.favouriteJokesList = this.getSavedFavourite();
     if (!!this.favouriteJokesList) {
@@ -31,10 +31,8 @@ export class ManageFavService {
   }
 
   private getSavedFavourite = (): Array<Joke> => {
-    if (this.hasItem('saveJoke')) {
-      return JSON.parse(localStorage.getItem('saveJoke'))
-        .map((fav: Joke) => <Joke>fav);
-    }
+      return this.hasItem('saveJoke') ? JSON.parse(localStorage.getItem('saveJoke'))
+        .map((fav: Joke) => <Joke>fav): [];
   }
   private handelLocalStorage = (data: Joke[]) => {
     if (this.hasItem('saveJoke')) {

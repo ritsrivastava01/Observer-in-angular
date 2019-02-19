@@ -13,14 +13,14 @@ export class GetJokesService {
 
   getJokes = (noOfJokes: number): Observable<Joke[]> => {
     return this.httpClient
-      .get(`http://api.icndb.com/jokes/random/${noOfJokes}`)
+      .get(`https://api.icndb.com/jokes/random/${noOfJokes}`)
       .pipe(
         map((response: any) => {
           return response.value.map(value =>
             <Joke>{
               id: Number(value.id),
               message: String(value.joke),
-              isFav: false
+              isFavourite: false
             });
         }),
 
@@ -28,22 +28,6 @@ export class GetJokesService {
       );
   }
 
-  getOneJoke = (): Observable<Joke[]> => {
-    return this.httpClient
-      .get('http://api.icndb.com/jokes/random/1')
-      .pipe(
-        map((response: any) => {
-          return response.value.map(value =>
-            <Joke>{
-              id: Number(value.id),
-              message: String(value.joke),
-              isFav: false
-            });
-        }),
-
-        catchError(this.handleErrorObservable)
-      );
-  }
   private handleErrorObservable(error: Response | any) {
     console.error(error.message || error);
     return Observable.throw(error.message || error);
