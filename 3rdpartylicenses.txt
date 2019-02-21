@@ -341,11 +341,11 @@ MIT
 
 @angular/material/card
 
-@angular/material/form-field
-
 @angular/material/tooltip
 
 @angular/material/snack-bar
+
+@angular/material/form-field
 
 @angular/material/toolbar
 
