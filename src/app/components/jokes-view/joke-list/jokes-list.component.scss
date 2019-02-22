@@ -1,4 +1,7 @@
 :host {
+display:block;
+height:100%;
+overflow:hidden;
 
   span {
     padding-left: 15px;
@@ -22,6 +25,10 @@
     }
   }
 
+  .joke-list {
+    padding-top: 20px;
+  }
+  
   .no-favourite {
     justify-content: center;
     height: 400px;
@@ -30,7 +37,4 @@
     font-size: 3rem;
   }
 
-  .joke-list {
-    padding-top: 20px;
-  }
 }

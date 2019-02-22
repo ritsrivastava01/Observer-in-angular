@@ -1,22 +1,36 @@
+<!-- Jokes List View -->
 <ng-container *ngIf="!isFavouriteTab">
   <h1>Jokes</h1>
   <span>Hit on 'Like button' to add in your favourite joke.</span>
 </ng-container>
+
+<!-- Spinner  -->
+
+  <mat-spinner color="warn" style="margin:0 auto;"  strokeWidth="3.2" *ngIf="!isFavouriteTab && !jokesList?.length"></mat-spinner>
+
+<!-- Favourite Jokes List View -->
 <ng-container *ngIf="isFavouriteTab">
-    <div class="favourite-header">
-  <div>
-    <h1>Favourite Jokes</h1>
-    <span>Hit on 'Like button' to remove your favourite joke list.</span>
+  <div class="favourite-header">
+    <div>
+      <h1>Favourite Jokes</h1>
+      <span>Hit on 'Like button' to remove your favourite joke list.</span>
+    </div>
+    <div class="flex-spacer"></div>
+    <mat-slide-toggle color="warn"  (change)="addRandomJoke($event)">Add Random Favourite Joke</mat-slide-toggle>
   </div>
-  <div class="flex-spacer"></div>
-  <mat-slide-toggle (change)="addRandomJoke($event)">Add Random Favourite Joke</mat-slide-toggle>
-</div>
 </ng-container>
+
+<!-- Joke list -->
 <div class="joke-list">
-<div *ngFor="let joke of jokesList; trackBy: trackByFn" >
-  <app-joke-card [joke]=joke (jokeCardSelected)="jokeCardSelected($event)"></app-joke-card>
+  <div *ngFor="let joke of jokesList; trackBy: trackByFn">
+    <app-joke-card [joke]=joke (jokeCardSelected)="jokeCardButtonClicked($event)"></app-joke-card>
+  </div>
 </div>
-</div>
-<div *ngIf="!jokesList?.length" class="no-favourite">
+
+
+
+
+<!-- Show the message in case of no joke in Favourite list -->
+<div *ngIf="isFavouriteTab && !jokesList?.length" class="no-favourite">
   No Favourite Joke!!!
 </div>

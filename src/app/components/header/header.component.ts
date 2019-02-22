@@ -1,5 +1,6 @@
 
 import { Component, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -19,7 +20,7 @@ export class HeaderComponent {
    * clear session
    * then redirect to login screen
    */
-  logoutSession = () => {
+  logoutSession = (): void => {
     this.isSuccessfulLogin = false;
     this.logoutClicked.emit();
   }

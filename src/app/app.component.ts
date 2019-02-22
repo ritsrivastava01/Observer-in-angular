@@ -13,33 +13,55 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, private snackBar: MatSnackBar) {
 
   }
-  title = 'front-man';
+  title: String = 'Observer In Angular';
+
+  // tslint:disable-next-line:typedef
   ngOnInit() {
     this.isSuccessfulLogin = sessionStorage.getItem('login') ? true : false;
     this.redirectToJokesPage('You are already Logged in');
   }
 
-  logoutClickedHandler = () => {
+  /**
+   * Logout handler: Logout the application
+   * and redirect to Login screen
+   * @returns void
+   */
+  logoutClickedHandler = (): void => {
     sessionStorage.removeItem('login');
     this.isSuccessfulLogin = !this.isSuccessfulLogin;
     this.router.navigate(['']);
     this.showSnackBar('You Logged out successfully');
   }
 
-  loginDoneHandler = (loginResult: boolean) => {
+  /**
+   * Login handler: login the application
+   * and redirect to Jokes screen
+   * @returns void
+   */
+  loginDoneHandler = (loginResult: boolean): void => {
     sessionStorage.setItem('login', 'done');
     this.isSuccessfulLogin = loginResult;
     this.redirectToJokesPage('You are logged in successfully');
   }
 
-  redirectToJokesPage = (snackBarMessage) => {
+  /**
+   * Used to redirect to Jokes page
+   * @param  {} snackBarMessage : Snackbar message
+   * @returns void
+   */
+  private redirectToJokesPage = (snackBarMessage: string): void => {
     if (this.isSuccessfulLogin) {
       this.router.navigate(['jokes']);
       this.showSnackBar(snackBarMessage);
     }
   }
 
-  showSnackBar = (snackBarMessage: string) => {
+  /**
+   * Used to show the snack bar message
+   * @param  {string} snackBarMessage: snackbar message
+   * @returns void
+   */
+  private showSnackBar = (snackBarMessage: string): void => {
     this.snackBar.open(snackBarMessage, null, {
       duration: 2000,
     });

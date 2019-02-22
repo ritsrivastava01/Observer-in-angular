@@ -4,8 +4,6 @@ import { LoginComponent } from './login.component';
 import { MatCardModule, MatButtonModule, MatInputModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ValidateLoginService } from './validate-login.service';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-
 
 @NgModule({
   declarations: [
@@ -16,8 +14,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatCardModule,
     MatButtonModule,
     ReactiveFormsModule,
-    MatInputModule,
-    MatSnackBarModule
+    MatInputModule
   ],
   exports: [
     LoginComponent

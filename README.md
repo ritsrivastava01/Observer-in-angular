@@ -13,6 +13,7 @@ This application is able to demonstrate the below feature:
     1. password must include one increasing straight of at least three letters, like  `abc`, `cde`, `fgh` and so on, up to `xyz` . They cannot skip letters; `acd` doesn't count.
     2. Password may not contain the letters `i, O, or l`.
     3. Passwords must contain at least two non-overlapping pairs of letters, like `aa, bb, or cc`.
+    4. Sample Password are: `abcaabb`,`qqwwxyz`,`pqrwwee` etc.
     
 2. Fetch the record from service by Observer pattern and used subjects
 3. User can save the record as favourite record
@@ -47,4 +48,6 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Running unit tests
 
 Yet to come!!!
+## URL
+[Observable In Angular](https://ritsrivastava01.github.io/Observer-in-angular/ )
 

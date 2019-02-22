@@ -1,9 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { ValidateLoginService } from './validate-login.service';
-import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
-
 
 /**
  * used to custom validation
@@ -15,11 +12,11 @@ export const forbiddenCharacterValidator = (): ValidatorFn => {
     const forbidden = control.value ? control
       .value.toString()
       .split('')
-      .filter(x => (x.toLowerCase() === 'o' || x === 'i' || x === 'l')) : [];
+      .filter((x: String) => (x.toLowerCase() === 'o' || x === 'i' || x === 'l')) : [];
 
     return forbidden.length > 0 ? { 'forbiddenCharacter': forbidden } : null;
   };
-}
+};
 
 @Component({
   selector: 'app-login',
@@ -30,14 +27,14 @@ export const forbiddenCharacterValidator = (): ValidatorFn => {
 
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  customErrorMessage = '';
+  customErrorMessage: String = '';
   @Output() loginDone: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private validatePassword: ValidateLoginService,
-    private fb: FormBuilder, private router: Router,
-    private snackBar: MatSnackBar) {
+    private fb: FormBuilder) {
   }
 
+  // tslint:disable-next-line:typedef
   ngOnInit() {
     this.loginForm = this.fb.group({
       userId: ['', Validators.required],
@@ -50,12 +47,13 @@ export class LoginComponent implements OnInit {
     });
   }
   // convenience getter for easy access to form fields
+  // tslint:disable-next-line:typedef
   get frm() { return this.loginForm.controls; }
 
   /**
    * USed to reset the login form
    */
-  resetForm = () => {
+  resetForm = (): void => {
     this.loginForm.reset();
     this.customErrorMessage = '';
   }
@@ -65,7 +63,7 @@ export class LoginComponent implements OnInit {
    * Check if from is valid OR not
    * if from is valid  then check the Pattern id it contains then continue Otherwise show error
    */
-  onLoginClickHandler = () => {
+  loginClicked = () => {
     if (this.loginForm.valid) {
       if (this.validatePassword.isPasswordContainPattern(this.loginForm.controls.password.value)) {
 
@@ -75,13 +73,13 @@ export class LoginComponent implements OnInit {
           this.customErrorMessage = 'Passwords must contain at least two non-overlapping pairs of letters, like aa, bb, or cc';
         }
 
-
       } else {
-
-        // this.isPasswordInValid = true;
         this.customErrorMessage = 'Password must include one increasing straight of at least three letters, like abc , cde , fgh.';
 
       }
+
     }
+
   }
+
 }

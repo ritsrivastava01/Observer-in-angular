@@ -1,9 +1,8 @@
+
 import { Component, OnInit } from '@angular/core';
 import { GetJokesService } from './services/get-jokes.service';
 import { Joke } from './joke';
 import { MatSnackBar } from '@angular/material';
-import { ManageFavService } from './services/manage-fav.service';
-
 
 @Component({
   selector: 'app-jokes-view',
@@ -14,18 +13,23 @@ export class JokesViewComponent implements OnInit {
   jokesList: Joke[] = [];
   favouriteJokeList: Joke[] = [];
 
-  constructor(private jokeService: GetJokesService, private snackBar: MatSnackBar, private manageFavService: ManageFavService) { }
+  constructor(private jokeService: GetJokesService, private snackBar: MatSnackBar) { }
 
+  // tslint:disable-next-line:typedef
   ngOnInit() {
     this.jokeService.getJokes(10)
-      .subscribe(jokes => {
+      .subscribe((jokes: Joke[]) => {
         this.jokesList = jokes;
       });
-        //this.manageFavService.getSavedFavourite()
-        
+
   }
+  /**
+   * Used to Add/Remove the joke from Favourite list
+   * @param  {Joke} selectedJoke : Selected Joke
+   * @returns void
+   */
   jokeSelected = (selectedJoke: Joke): void => {
-    let message = '';
+    let message: string = '';
     if (selectedJoke.isFavourite) {
       this.favouriteJokeList = [...this.favouriteJokeList, selectedJoke];
       message = 'Joke added in your favourite list successfully';
@@ -38,7 +42,5 @@ export class JokesViewComponent implements OnInit {
       duration: 1000,
     });
   }
-  matChange(evt) {
-    console.log(evt);
-  }
+
 }

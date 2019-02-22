@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Joke } from '../joke';
 
 @Component({
@@ -7,12 +8,20 @@ import { Joke } from '../joke';
   styleUrls: ['./joke-card.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class JokeCardComponent {
+
   @Input() joke: Joke;
-  @Output() jokeCardSelected: EventEmitter<Joke> = new EventEmitter<Joke>()
+  @Output() jokeCardSelected: EventEmitter<Joke> = new EventEmitter<Joke>();
+
   constructor() { }
 
-  onClickHandler = (status: boolean) => {
+  /**
+   * Used to handle the like/dislike button handler
+   * @param  {boolean} status == like OR dis-like
+   * @returns void
+   */
+  buttonClicked = (status: boolean): void => {
     this.joke.isFavourite = status;
     this.jokeCardSelected.emit(this.joke);
   }

@@ -5,7 +5,7 @@ import { Subject, interval } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 import { MatSlideToggleChange } from '@angular/material';
 import { GetSingleJokeService } from '../services/get-single-joke.service';
-const NO_OF_MAX_FAV_JOKES = 10;
+const NO_OF_MAX_FAV_JOKES: Number = 10;
 
 @Component({
   selector: 'app-jokes-list',
@@ -13,18 +13,19 @@ const NO_OF_MAX_FAV_JOKES = 10;
   styleUrls: ['./jokes-list.component.scss'],
   providers: [GetSingleJokeService]
 })
+
 export class JokesListComponent implements OnInit {
   @Input() jokesList: Joke[];
   @Input() isFavouriteTab: boolean;
   @Output() jokeSelected: EventEmitter<Joke> = new EventEmitter;
   private getRandomJoke: boolean;
-  private getJokeAutomatic = new Subject<boolean>();
+  private getJokeAutomatic: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private getSingleJoke: GetSingleJokeService, private cdRef:ChangeDetectorRef) { }
+  constructor(private getSingleJoke: GetSingleJokeService, private cdRef: ChangeDetectorRef) { }
 
+  // tslint:disable-next-line:typedef
   ngOnInit() {
-
-    this.getJokeAutomatic.subscribe(value => {
+    this.getJokeAutomatic.subscribe((value: boolean) => {
       this.getRandomJoke = value;
       interval(1000)
         .pipe(
@@ -32,29 +33,35 @@ export class JokesListComponent implements OnInit {
         )
         .subscribe(() => {
           this.getSingleJoke.getRandomJoke()
-            .subscribe(x => {
-              console.table(this.jokesList);
+            .subscribe((x: Array<Joke>) => {
               const joke: Joke = x[0];
               joke.isFavourite = true;
-              this.jokeCardSelected(joke);
+              this.jokeCardButtonClicked(joke);
               this.cdRef.detectChanges();
             });
-    }
-    );
-  });
+        });
 
-}
+    });
 
-trackByFn(index, item: Joke) {
-  return item.isFavourite;
-}
+  }
+  /**
+   * Used to track the joke  list  and refresh the list on click on dislike from Fav list
+   * @param  {} index Joke Index in list
+   * @param  {Joke} item Joke Item
+   */
+  trackByFn = (index: number, item: Joke): boolean => item.isFavourite;
 
+  /**
+   * USed to handle card button (Like OR dislike)
+   * @param  {Joke} joke: Joke with updated values
+   */
+  jokeCardButtonClicked = (joke: Joke): void => this.jokeSelected.emit(joke);
 
+  /**
+   * Used to add Random Joke in Favourite list
+   * @param  {MatSlideToggleChange} event: Provide ON/OFF info
+   * @returns void
+   */
+  addRandomJoke = (event: MatSlideToggleChange): void => this.getJokeAutomatic.next(event.checked);
 
-jokeCardSelected = (joke: Joke) => this.jokeSelected.emit(joke);
-
-addRandomJoke = (event: MatSlideToggleChange) => {
-  console.log(event.checked);
-  this.getJokeAutomatic.next(event.checked);
-}
 }
