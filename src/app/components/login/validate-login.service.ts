@@ -28,7 +28,7 @@ export class ValidateLoginService {
     return this.getArrayOfThreeCharString(password)
       .map((x: string) => this.getCharCodeFromString(x))
       .map((y: number[]) => this.isSameCharCoderRepeatTwoTimes(y))
-      .filter((z: boolean) => z === true).length > 2;
+      .filter((z: boolean) => z === true).length >= 2;
   }
 
   /**
