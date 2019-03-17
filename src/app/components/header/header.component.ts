@@ -10,7 +10,7 @@ import { Component, ChangeDetectionStrategy, Output, EventEmitter, Input } from 
 
 export class HeaderComponent {
 
-  @Input() isSuccessfulLogin: boolean;
+  @Input() isSuccessfulLogin: boolean = true;
   @Output() logoutClicked: EventEmitter<void> = new EventEmitter();
 
   constructor() { }

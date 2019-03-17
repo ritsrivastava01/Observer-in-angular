@@ -4,7 +4,7 @@ import { Joke } from '../joke';
 import { of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
-fdescribe('GetJokesService', () => {
+describe('GetJokesService', () => {
   let service: GetJokesService;
   let httpClientSpy: { get: jasmine.Spy };
   const testJoke: any = { 'type': 'success', 'value': [{ 'id': 1, 'joke': 'test1', 'categories': ['nerdy'] }] };
@@ -29,7 +29,7 @@ fdescribe('GetJokesService', () => {
       });
 
   });
-  xit('should handel the error', () => {
+  it('should handle the error', () => {
     const errorHandler: HttpErrorResponse = new HttpErrorResponse({
       error: 'test 404 not found',
       status: 404,
